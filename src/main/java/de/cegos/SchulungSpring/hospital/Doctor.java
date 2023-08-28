@@ -1,15 +1,23 @@
 package de.cegos.SchulungSpring.hospital;
 
-import javax.print.Doc;
+import lombok.Setter;
 
+@Setter
 public class Doctor {
-    public String name;
 
-    public Doctor(String name) {
+    private String name;
+    private Nurse helper;
+
+    public Doctor() {
+    }
+
+    public Doctor(String name, Nurse helper) {
         this.name = name;
+        this.helper = helper;
     }
 
     public String assist() {
-        return "Dr. " + this.name + " is assisting.";
+        return "Dr. " + this.name + " is assisting. "
+                + this.helper.assist();
     }
 }

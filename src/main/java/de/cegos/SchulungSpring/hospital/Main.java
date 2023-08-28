@@ -10,7 +10,10 @@ public class Main {
                 new ClassPathXmlApplicationContext("spring.xml");
 
         Doctor superDoc = applicationContext.getBean(Doctor.class);
+        superDoc.setName("Özgu");
+        System.out.println(superDoc.assist());
 
-        System.out.println(superDoc.assist()); // .sout nach Ausdruck für System.out.println(Ausdruck)
+        Doctor megaDoc = applicationContext.getBean(Doctor.class);
+        System.out.println(megaDoc.assist());
     }
 }

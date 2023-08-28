@@ -2,7 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="doctor" class="de.cegos.SchulungSpring.hospital.Doctor">
-        <constructor-arg value="Omar"/>
+    <bean id="doctor" class="de.cegos.SchulungSpring.hospital.Doctor"
+    scope="prototype">
+        <property name="name" value="Omar"/>
+        <property name="helper" ref="nurse"/>
     </bean>
+    <bean id="nurse" class="de.cegos.SchulungSpring.hospital.Nurse"
+    scope="prototype"/>
 </beans>
