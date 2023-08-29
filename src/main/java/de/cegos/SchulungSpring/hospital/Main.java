@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @ComponentScan
@@ -29,5 +30,14 @@ public class Main {
 
         Doctor megaDoc = applicationContext.getBean(Doctor.class);
         System.out.println(megaDoc.assist());
+
+        List<Integer> integers = List.of(1, 2, 3, 4);
+
+        long sum = integers.stream()
+                .mapToLong(Integer::longValue)
+                .sum();
+
+        System.out.println(sum);
+
     }
 }

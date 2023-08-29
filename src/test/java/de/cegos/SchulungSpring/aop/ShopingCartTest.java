@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class ShopingCartTest {
 
     @Autowired
@@ -96,5 +98,29 @@ class ShopingCartTest {
 
         assertEquals(200, shopingCart.getCountOfItems());
         assertEquals(20000L, shopingCart.getSumOfPrices());
+    }
+
+    @Test
+    @DisplayName("Add multiple Items at once")
+    public void testAddItems1() {
+        Iterable<Item> items = List.of(
+                new Item("Cola", 100L),
+                new Item("Sprite", 70L),
+                new Item("Fanta", 5L)
+        );
+
+        shopingCart.addItems(items);
+
+        assertEquals(3L, shopingCart.getCountOfItems());
+        assertEquals(175L, shopingCart.getSumOfPrices());
+    }
+
+    @Test
+    @DisplayName("Add empty List of Items")
+    public void testAddItems2() {
+        Iterable<Item> emptyList = List.of();
+        shopingCart.addItems(emptyList);
+        assertEquals(0L, shopingCart.getCountOfItems());
+        assertEquals(0L, shopingCart.getSumOfPrices());
     }
 }
