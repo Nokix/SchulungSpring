@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
 public class HospitalConfig {
@@ -36,8 +37,9 @@ public class HospitalConfig {
 
     @Bean("language")
     @ConditionalOnProperty(name = "lang", havingValue = "eng")
+    // SpEL: Spring Expression Language
     public String english(@Value("${lang.eng}") String location) {
-        String s = "laod english datafile from ";
+        String s = "laod english datafile from " + location;
         System.out.println(s);
         return s + location;
     }
@@ -46,6 +48,23 @@ public class HospitalConfig {
     @ConditionalOnProperty(name = "lang", havingValue = "fr")
     public String french(@Value("${lang.fr}") String location) {
         String s = "laod french datafile from " + location;
+        System.out.println(s);
+        return s;
+    }
+
+    @Bean
+    @Profile("h2")
+    public String h2Database(@Value("${database.loc}") String loc) {
+        String s = "Connected to H2 Database @ " + loc;
+        System.out.println(s);
+        return s;
+    }
+
+    @Bean
+    @Profile("mysql || default")
+    public String mysqlDatabase(
+            @Value("${database.loc:fallbackDB}") String loc) {
+        String s = "Connected to MySQL Database @ " + loc;
         System.out.println(s);
         return s;
     }

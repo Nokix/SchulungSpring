@@ -9,17 +9,17 @@ import java.util.Arrays;
 @SpringBootApplication
 public class SchulungSpringApplication {
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(SchulungSpringApplication.class, args);
-		String[] beanDefinitionNames =
-				context
-				.getBeanDefinitionNames();
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context =
+                SpringApplication.run(SchulungSpringApplication.class, args);
+        String[] beanDefinitionNames =
+                context.getBeanDefinitionNames();
 
-		//context.getBean("language");
+        //context.getBean("language");
 
 //		Arrays.stream(beanDefinitionNames).forEach(System.out::println);
 
 //		Arrays.stream(context.getAliases("beauty")).forEach(System.out::println);
-	}
+    }
 
 }
