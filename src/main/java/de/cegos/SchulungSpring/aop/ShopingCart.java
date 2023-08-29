@@ -15,14 +15,13 @@ public class ShopingCart {
     private Long sumOfPrices = 0L;
     private Long countOfItems = 0L;
 
-    public ShopingCart addItem(Item item) {
+    public void addItem(Item item) {
         Long currentNumberOfItem = cart.getOrDefault(item, 0L);
         cart.put(item, currentNumberOfItem + 1);
-        return this;
     }
 
-    public ShopingCart removeItem(Item item) {
-        if (!cart.containsKey(item)) return this;
+    public void removeItem(Item item) {
+        if (!cart.containsKey(item)) return;
 
         Long itemAmount = cart.get(item);
         if (itemAmount > 1) {
@@ -30,13 +29,11 @@ public class ShopingCart {
         } else {
             cart.remove(item);
         }
-        return this;
     }
 
-    public ShopingCart addItems(Iterable<Item> items) {
+    public void addItems(Iterable<Item> items) {
         StreamSupport.stream(items.spliterator(), false)
                 .forEach(this::addItem);
-        return this;
     }
 
     void updateSumOfPrices() {

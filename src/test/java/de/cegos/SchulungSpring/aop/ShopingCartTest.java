@@ -123,4 +123,17 @@ class ShopingCartTest {
         assertEquals(0L, shopingCart.getCountOfItems());
         assertEquals(0L, shopingCart.getSumOfPrices());
     }
+
+    @Test
+    @DisplayName("Only sugar snacks are allowed")
+    public void testAddItems() {
+        Item cola = new Item("Cola", 100L);
+        Item möhren = new Item("Möhren", 80L);
+
+        shopingCart.addItem(cola);
+        shopingCart.addItem(möhren);
+
+        assertEquals(1L, shopingCart.getCountOfItems());
+        assertEquals(100L, shopingCart.getSumOfPrices());
+    }
 }
