@@ -15,7 +15,7 @@ public class SchulungSpringApplication {
         String[] beanDefinitionNames =
                 context.getBeanDefinitionNames();
 
-        //context.getBean("language");
+        // context.getBean("language");
 
 //		Arrays.stream(beanDefinitionNames).forEach(System.out::println);
 
