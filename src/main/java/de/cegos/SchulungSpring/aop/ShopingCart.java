@@ -18,9 +18,6 @@ public class ShopingCart {
     public ShopingCart addItem(Item item) {
         Long currentNumberOfItem = cart.getOrDefault(item, 0L);
         cart.put(item, currentNumberOfItem + 1);
-
-        updateCountOfItems();
-        updateSumOfPrices();
         return this;
     }
 
@@ -33,28 +30,22 @@ public class ShopingCart {
         } else {
             cart.remove(item);
         }
-
-        updateCountOfItems();
-        updateSumOfPrices();
-
         return this;
     }
 
     public ShopingCart addItems(Iterable<Item> items) {
         StreamSupport.stream(items.spliterator(), false)
                 .forEach(this::addItem);
-        updateCountOfItems();
-        updateSumOfPrices();
         return this;
     }
 
-    private void updateSumOfPrices() {
+    void updateSumOfPrices() {
         this.sumOfPrices = cart.entrySet().stream()
                 .mapToLong(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
 
-    private void updateCountOfItems() {
+    void updateCountOfItems() {
         this.countOfItems =
                 cart.values().stream().mapToLong(Long::longValue).sum();
     }
