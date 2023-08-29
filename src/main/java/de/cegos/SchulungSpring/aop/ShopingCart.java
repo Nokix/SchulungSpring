@@ -20,6 +20,7 @@ public class ShopingCart {
         cart.put(item, currentNumberOfItem + 1);
     }
 
+    @TimeMe
     public void removeItem(Item item) {
         if (!cart.containsKey(item)) return;
 

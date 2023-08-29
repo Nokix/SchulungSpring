@@ -1,2 +1,4 @@
-package de.cegos.SchulungSpring.aop;public @interface TimeMe {
+package de.cegos.SchulungSpring.aop;
+
+public @interface TimeMe {
 }
