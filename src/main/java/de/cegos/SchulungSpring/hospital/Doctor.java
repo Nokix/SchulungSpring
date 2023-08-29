@@ -2,6 +2,7 @@ package de.cegos.SchulungSpring.hospital;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ public class Doctor {
 
     // @Qualifier(q):
     // Suche nach einer Bean mit der Id, Name, Alias oder Qualifier q.
-    public Doctor(@Qualifier("getDoctorName") String name,
+    public Doctor(@Value("${doctor.name}") String name,
                   @Qualifier("krankenschwester") Nurse helper) {
         this.name = name;
         this.helper = helper;

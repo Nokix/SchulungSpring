@@ -15,9 +15,11 @@ public class SchulungSpringApplication {
 				context
 				.getBeanDefinitionNames();
 
-		Arrays.stream(beanDefinitionNames).forEach(System.out::println);
+		//context.getBean("language");
 
-		Arrays.stream(context.getAliases("beauty")).forEach(System.out::println);
+//		Arrays.stream(beanDefinitionNames).forEach(System.out::println);
+
+//		Arrays.stream(context.getAliases("beauty")).forEach(System.out::println);
 	}
 
 }
