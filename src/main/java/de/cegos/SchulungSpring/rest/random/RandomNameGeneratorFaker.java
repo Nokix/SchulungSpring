@@ -15,4 +15,9 @@ public class RandomNameGeneratorFaker implements RandomNameGenerator{
     public String getRandomFullName() {
         return faker.name().fullName();
     }
+
+    @Override
+    public String getRandomMail() {
+        return faker.internet().emailAddress();
+    }
 }

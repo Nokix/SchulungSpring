@@ -2,6 +2,7 @@ package de.cegos.SchulungSpring.rest;
 
 import de.cegos.SchulungSpring.rest.model.Student;
 import de.cegos.SchulungSpring.rest.repo.StudentRepository;
+import de.cegos.SchulungSpring.rest.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -10,14 +11,10 @@ import org.springframework.stereotype.Component;
 public class DataBaseFiller implements CommandLineRunner {
 
     @Autowired
-    StudentRepository studentRepository;
+    StudentService studentService;
 
     @Override
     public void run(String... args) throws Exception {
-        Student student = Student.builder()
-                .fullName("Claudia D")
-                .mail("cld@myjob.de")
-                .build();
-        studentRepository.save(student);
+        studentService.saveRandomStudents(200);
     }
 }
