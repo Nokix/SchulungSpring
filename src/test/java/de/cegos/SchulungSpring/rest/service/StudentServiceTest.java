@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class StudentServiceTest {
@@ -29,10 +30,10 @@ class StudentServiceTest {
         String mail = "max.m@supermail.de";
         Student student = Student.builder().fullName(fullName).mail(mail).build();
 
-        Mockito.when(random.getRandomFullName()).thenReturn(fullName);
-        Mockito.when(random.getRandomMail()).thenReturn(mail);
+        when(random.getRandomFullName()).thenReturn(fullName);
+        when(random.getRandomMail()).thenReturn(mail);
 
-        Mockito.when(studentRepository.save(student)).thenReturn(student);
+        when(studentRepository.save(any())).thenReturn(student);
 
         List<Student> result = studentService.saveRandomStudents(3);
         assertEquals(3, result.size());
