@@ -15,9 +15,9 @@ public class DataBaseFiller implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        studentService.saveRandomStudents(200);
-
-        studentService.findByFullNameContains("Dr.")
-                .forEach(System.out::println);
+//        studentService.saveRandomStudents(200);
+//
+//        studentService.findByFullNameContains("Dr.")
+//                .forEach(System.out::println);
     }
 }
