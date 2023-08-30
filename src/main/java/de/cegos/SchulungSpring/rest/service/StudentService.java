@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -25,13 +26,11 @@ public class StudentService {
     }
 
     public List<Student> saveRandomStudents(Integer n) {
-        ArrayList<Student> result = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            Student randomStudent = createRandomStudent();
-            Student savedStudent = studentRepo.save(randomStudent);
-            result.add(savedStudent);
-        }
-        return result;
+        return Stream
+                .generate(this::createRandomStudent)
+                .limit(n)
+                .map(studentRepo::save)
+                .toList();
     }
 
     public List<Student> findByFullNameContains(String fullNamePart) {
