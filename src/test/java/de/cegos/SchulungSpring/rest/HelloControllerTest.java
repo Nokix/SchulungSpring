@@ -47,8 +47,14 @@ class HelloControllerTest {
     }
 
     @Test
-    public void testBye() {
+    public void testBye() throws Exception {
+        MockHttpServletRequestBuilder getRequest =
+                MockMvcRequestBuilders.get("/bye")
+                        .param("name", "Max");
 
+        mockMvc.perform(getRequest)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Goodbye Max"));
     }
 
 }
