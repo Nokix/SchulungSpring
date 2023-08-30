@@ -30,8 +30,12 @@ class StudentServiceTest {
         String mail = "max.m@supermail.de";
         Student student = Student.builder().fullName(fullName).mail(mail).build();
 
-        when(random.getRandomFullName()).thenReturn(fullName);
-        when(random.getRandomMail()).thenReturn(mail);
+        when(random.getRandomFullName())
+                .thenReturn(fullName)
+                .thenReturn("Dora D")
+                .thenReturn("Anton A");
+        when(random.getRandomMail())
+                .thenReturn(mail);
 
         when(studentRepository.save(any())).thenReturn(student);
 
