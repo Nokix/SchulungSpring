@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
 public class Student {
     @Id
     @GeneratedValue
