@@ -1,5 +1,6 @@
 package de.cegos.SchulungSpring.hospital;
 
+import de.cegos.SchulungSpring.aop.TimeMe;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +23,7 @@ public class Doctor {
         this.helper = helper;
     }
 
+    @TimeMe
     public String assist() {
         return "Dr. " + this.name + " is assisting. "
                 + this.helper.assist();

@@ -40,7 +40,7 @@ public class HospitalConfig {
     // SpEL: Spring Expression Language
     public String english(@Value("${lang.eng}") String location) {
         String s = "laod english datafile from " + location;
-        System.out.println(s);
+//        System.out.println(s);
         return s + location;
     }
 
@@ -48,7 +48,7 @@ public class HospitalConfig {
     @ConditionalOnProperty(name = "lang", havingValue = "fr")
     public String french(@Value("${lang.fr}") String location) {
         String s = "laod french datafile from " + location;
-        System.out.println(s);
+//        System.out.println(s);
         return s;
     }
 
@@ -56,7 +56,7 @@ public class HospitalConfig {
     @Profile("h2")
     public String h2Database(@Value("${database.loc}") String loc) {
         String s = "Connected to H2 Database @ " + loc;
-        System.out.println(s);
+//        System.out.println(s);
         return s;
     }
 
@@ -65,7 +65,7 @@ public class HospitalConfig {
     public String mysqlDatabase(
             @Value("${database.loc:fallbackDB}") String loc) {
         String s = "Connected to MySQL Database @ " + loc;
-        System.out.println(s);
+//        System.out.println(s);
         return s;
     }
 
