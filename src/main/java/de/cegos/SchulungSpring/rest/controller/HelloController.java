@@ -1,4 +1,4 @@
-package de.cegos.SchulungSpring.rest;
+package de.cegos.SchulungSpring.rest.controller;
 
 import de.cegos.SchulungSpring.rest.random.RandomNameGenerator;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package de.cegos.SchulungSpring.rest;
+package de.cegos.SchulungSpring.rest.controller;
 
 import de.cegos.SchulungSpring.rest.model.Student;
 import de.cegos.SchulungSpring.rest.service.StudentService;
