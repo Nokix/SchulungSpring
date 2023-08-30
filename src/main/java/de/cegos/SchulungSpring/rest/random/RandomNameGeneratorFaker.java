@@ -2,13 +2,14 @@ package de.cegos.SchulungSpring.rest.random;
 
 import com.github.javafaker.Faker;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RandomNameGeneratorFaker implements RandomNameGenerator{
 
-    private Faker faker;
+    private final Faker faker;
 
     @Override
     public String getRandomFullName() {
