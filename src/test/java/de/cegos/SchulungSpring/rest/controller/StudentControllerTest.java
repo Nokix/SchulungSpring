@@ -48,7 +48,7 @@ class StudentControllerTest {
                 .content(jsonInput);
 
         mockMvc.perform(postRequest)
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().json(jsonOutput));
     }
 }

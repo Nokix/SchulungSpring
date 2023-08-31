@@ -1,5 +1,6 @@
 package de.cegos.SchulungSpring;
 
+import de.cegos.SchulungSpring.rest.controller.StudentController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -14,6 +15,9 @@ public class SchulungSpringApplication {
                 SpringApplication.run(SchulungSpringApplication.class, args);
         String[] beanDefinitionNames =
                 context.getBeanDefinitionNames();
+
+        StudentController controller = context.getBean(StudentController.class);
+        System.out.println();
 
         // context.getBean("language");
 

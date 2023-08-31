@@ -2,7 +2,10 @@ package de.cegos.SchulungSpring.rest.controller;
 
 import de.cegos.SchulungSpring.rest.model.Student;
 import de.cegos.SchulungSpring.rest.service.StudentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +28,9 @@ public class StudentController {
     }
 
     @PostMapping("save")
-    public Student saveStudent(@RequestBody Student student) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Student saveStudent(
+            @RequestBody @Valid Student student) {
         return studentService.saveStudent(student);
     }
 }
