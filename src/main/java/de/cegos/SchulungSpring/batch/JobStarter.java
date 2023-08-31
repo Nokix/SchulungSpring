@@ -25,7 +25,8 @@ public class JobStarter implements CommandLineRunner {
 
     private JobParameters jobParameters() {
         return new JobParametersBuilder()
-                .addLong("startAt", System.currentTimeMillis())
+                //.addLong("startAt", System.currentTimeMillis())
+                .addLong("startAt", 1693486150419L)
                 .toJobParameters();
     }
 }

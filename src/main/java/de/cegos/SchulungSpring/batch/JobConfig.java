@@ -13,6 +13,7 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemReader;
@@ -90,7 +91,7 @@ public class JobConfig {
                 .build();
     }
 
-    @Bean
+//    @Bean
     Job createTwoStepJob(
             Step writeRandomStudentsToDatabase,
             Step writeDatabaseToCSV) {
@@ -165,5 +166,23 @@ public class JobConfig {
         return new FileSystemResource(path);
     }
 
+
+    @Bean
+    @Primary
+    Job stateFullStepJob() {
+
+        List<String> list = List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k");
+
+        TaskletStep listReadAndSoutStep = new StepBuilder("ListReadAndSoutStep", jobRepository)
+                .<String, String>chunk(3, transactionManager)
+                .reader(new StateFullListReader<>(list, 1500))
+                .processor(String::toUpperCase)
+                .writer(chunk -> chunk.forEach(System.out::println))
+                .build();
+
+        return new JobBuilder("StatefullStepJob", jobRepository)
+                .start(listReadAndSoutStep)
+                .build();
+    }
 
 }
