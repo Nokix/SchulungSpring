@@ -62,7 +62,6 @@ public class JobConfig {
             }
         };
 
-
         List<String> input = List.of("a", "b", "c", "d", "e", "f", "g");
 
         return new StepBuilder("Sout List on Console", jobRepository)
