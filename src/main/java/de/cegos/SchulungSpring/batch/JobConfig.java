@@ -1,5 +1,8 @@
 package de.cegos.SchulungSpring.batch;
 
+import de.cegos.SchulungSpring.rest.model.Student;
+import de.cegos.SchulungSpring.rest.repo.StudentRepository;
+import de.cegos.SchulungSpring.rest.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.ChunkListener;
 import org.springframework.batch.core.Job;
@@ -10,6 +13,9 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.data.RepositoryItemWriter;
+import org.springframework.batch.item.support.IteratorItemReader;
 import org.springframework.batch.item.support.ListItemReader;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -20,6 +26,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Configuration
 @RequiredArgsConstructor
@@ -70,6 +77,29 @@ public class JobConfig {
                 .reader(new ListItemReader<>(input))
                 .processor(String::toUpperCase)
                 .writer(chunk -> chunk.forEach(System.out::println))
+                .build();
+    }
+
+    @Bean
+    @Primary
+    Step writeRandomStudentsToDatabase(
+            StudentService studentService,
+            StudentRepository studentRepository
+    ) {
+        Iterable<Student> students = Stream
+                .generate(studentService::createRandomStudent)
+                .limit(100)
+                .toList();
+
+        RepositoryItemWriter<Student> writer =
+                new RepositoryItemWriter<>();
+
+        writer.setRepository(studentRepository);
+
+        return new StepBuilder("Data Generator Step", jobRepository)
+                .<Student, Student>chunk(10, transactionManager)
+                .reader(new IteratorItemReader<>(students))
+                .writer(writer)
                 .build();
     }
 

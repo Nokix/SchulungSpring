@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(1)
+@Profile("rest")
 public class DataBaseFiller implements CommandLineRunner {
 
     @Autowired
