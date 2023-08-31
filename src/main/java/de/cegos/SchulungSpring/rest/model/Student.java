@@ -13,6 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @ToString
 @Getter
+@Setter
 public class Student{
     @Id
     @GeneratedValue
